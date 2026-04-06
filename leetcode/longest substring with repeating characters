@@ -1,0 +1,42 @@
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int n = s.length();
+        int a[] = new int[256];
+
+        // Initialize all indices as -1
+        for (int i = 0; i < 256; i++) {
+            a[i] = -1;
+        }
+
+        int maxlength = 0;
+        int start = 0;     
+
+        
+        for (int end = 0; end < n; end++) {
+            char num = s.charAt(end);
+
+            if (a[num] >= start) {
+                start = a[num] + 1; 
+            }
+
+            a[num] = end;
+
+        
+            int w = end - start + 1;
+
+            
+            if (w > maxlength) {
+                maxlength = w;
+            }
+        }
+
+        return maxlength;
+    }
+
+    public static void main(String args[]) {
+        Solution sol = new Solution();
+        System.out.println(sol.lengthOfLongestSubstring("abcabcbb")); 
+        System.out.println(sol.lengthOfLongestSubstring("bbbbb"));   
+        System.out.println(sol.lengthOfLongestSubstring("pwwkew"));  
+    }
+}
